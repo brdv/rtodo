@@ -1,0 +1,9 @@
+[package]
+authors = ["brdv <brdv@pm.me>"]
+name = "rtodo"
+version = "0.0.1"
+edition = "2021"
+description = "A basic rust-based CLI todo app"
+
+[dependencies]
+clap = { version = "4.5.4", features = ["derive"] }
