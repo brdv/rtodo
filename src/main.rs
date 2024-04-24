@@ -1,7 +1,9 @@
 use clap::Parser;
-use rtodo::{Cli, Commands};
+use rtodo::{initialise_if_needed, Cli, Commands};
 
 fn main() {
+    initialise_if_needed();
+
     let rtodo = Cli::parse();
 
     println!("rtodo {} - a brdv product\n", env!("CARGO_PKG_VERSION"));

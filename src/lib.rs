@@ -1,6 +1,8 @@
+mod init;
 mod todo;
 
 use clap::{Args, Parser, Subcommand};
+pub use init::initialise_if_needed;
 
 #[derive(Parser, Debug)]
 #[command(name = "rtodo")]
