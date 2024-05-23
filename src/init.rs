@@ -1,16 +1,23 @@
-use crate::todo::{RTODO_DONE_DIR, RTODO_ROOT_DIR, RTODO_TODO_DIR};
+use crate::{
+    get_config_location, write_id_to_config, RTODO_DONE_DIR, RTODO_ROOT_DIR, RTODO_TODO_DIR,
+};
 use home;
-use std::{fs, path::Path};
+use std::{fs, io, path::Path};
 
-pub fn initialise_if_needed() {
-    if !dirs_exist(get_dir_names()) {
-        initialise();
+pub fn initialise_if_needed() -> io::Result<()> {
+    if !dirs_exist(get_dir_names()) || !config_exists() {
+        initialise()?;
     }
+
+    Ok(())
 }
 
-fn initialise() {
+fn initialise() -> io::Result<()> {
     println!("Initialising rtodo...");
-    create_dirs(get_dir_names())
+    create_dirs(get_dir_names());
+    create_config_file()?;
+
+    Ok(())
 }
 
 fn dirs_exist(locations: Vec<String>) -> bool {
@@ -21,6 +28,18 @@ fn dirs_exist(locations: Vec<String>) -> bool {
     }
 
     true
+}
+
+fn config_exists() -> bool {
+    Path::new(&get_config_location()).exists()
+}
+
+fn create_config_file() -> io::Result<()> {
+    fs::File::create(get_config_location())
+        .expect("An error occurred while creating the config file");
+
+    write_id_to_config(0)?;
+    Ok(())
 }
 
 fn create_dirs(locations: Vec<String>) {

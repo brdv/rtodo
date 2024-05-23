@@ -1,8 +1,13 @@
 mod init;
+mod list;
 mod todo;
+mod utils;
+
+pub use init::initialise_if_needed;
+pub use list::list;
+pub use utils::*;
 
 use clap::{Args, Parser, Subcommand};
-pub use init::initialise_if_needed;
 
 #[derive(Parser, Debug)]
 #[command(name = "rtodo")]
@@ -27,6 +32,7 @@ pub struct ListArgs {
     #[arg(short, long)]
     /// show all todos
     all: bool,
+    /// show only done todos
     #[arg(short, long)]
     done: bool,
 }
