@@ -7,6 +7,7 @@ pub struct Todo {
     pub id: u32,
     pub task: String,
     pub status: TodoStatus,
+    pub path: String,
 }
 
 impl Todo {
@@ -24,6 +25,7 @@ impl Todo {
             } else {
                 TodoStatus::Open
             },
+            path: path.to_string(),
         }
     }
 }

@@ -56,7 +56,7 @@ pub fn get_last_id() -> u32 {
         .read_line(&mut first_line)
         .expect("Could not read first line of config file.");
 
-    let split = first_line.split("=").collect::<Vec<&str>>();
+    let split: Vec<&str> = first_line.split('=').collect();
 
     if split.len() != 2 {
         panic!(
