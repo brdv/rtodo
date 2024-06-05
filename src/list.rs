@@ -3,14 +3,14 @@ use std::fs::{self, DirEntry};
 use crate::{get_rtodo_done_location, get_rtodo_todo_location, todo::Todo, ListArgs};
 
 pub fn list(args: &ListArgs) -> Vec<Todo> {
+    let mut todos = get_todos(args.done);
     if args.all {
-        let mut todos = get_todos(false);
-        let dones = get_todos(true);
+        let dones = get_todos(!args.done);
         todos.extend(dones);
-        return todos;
     }
 
-    get_todos(args.done)
+    todos.sort_by_key(|todo| todo.id);
+    todos
 }
 
 fn get_todos(done: bool) -> Vec<Todo> {
