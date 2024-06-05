@@ -1,8 +1,10 @@
+mod add;
 mod init;
 mod list;
 mod todo;
 mod utils;
 
+pub use add::add;
 pub use init::initialise_if_needed;
 pub use list::list;
 pub use utils::*;

@@ -114,3 +114,24 @@ fn write_first_line_of_file(path: &str, line: String) -> Result<(), io::Error> {
 
     Ok(())
 }
+
+pub fn create_slug(s: &str) -> String {
+    let slug = s
+        .chars()
+        .filter(|c| c.is_ascii_alphanumeric() || c.is_ascii_whitespace())
+        .collect::<String>()
+        .replace(" ", "-")
+        .to_lowercase();
+
+    slug
+}
+
+pub fn from_slug(slug: &str) -> String {
+    let replaced_spaces = slug.replace("-", " ");
+    let original_string = replaced_spaces
+        .chars()
+        .filter(|c| c.is_ascii_alphanumeric() || c.is_ascii_whitespace())
+        .collect::<String>();
+
+    original_string
+}

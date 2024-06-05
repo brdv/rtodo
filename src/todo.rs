@@ -1,6 +1,6 @@
 use std::fmt::Display;
 
-use crate::get_rtodo_done_location;
+use crate::{from_slug, get_rtodo_done_location};
 
 #[derive(Debug)]
 pub struct Todo {
@@ -19,7 +19,7 @@ impl Todo {
 
         Todo {
             id: parts[0].parse().unwrap_or(0),
-            task: parts[1].to_string(),
+            task: from_slug(parts[1]),
             status: if done {
                 TodoStatus::Done
             } else {

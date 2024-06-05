@@ -1,7 +1,7 @@
 use std::io;
 
 use clap::Parser;
-use rtodo::{initialise_if_needed, list, Cli, Commands};
+use rtodo::{add, initialise_if_needed, list, Cli, Commands};
 
 fn main() -> io::Result<()> {
     initialise_if_needed()?;
@@ -16,7 +16,17 @@ fn main() -> io::Result<()> {
                 println!("{}", todo);
             }
         }
-        Commands::Add { title } => todo!(),
+        Commands::Add { title } => match add(title.as_str()) {
+            Ok(added) => {
+                println!(
+                    "Added the following todo:\n\t{} \nat location: \n\t{}",
+                    added, added.path
+                )
+            }
+            Err(e) => {
+                eprintln!("Something went wrong while creating the todo: {}", e)
+            }
+        },
         Commands::Do { id } => todo!(),
     };
 
