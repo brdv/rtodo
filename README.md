@@ -1,6 +1,6 @@
 # rtodo
 
-A CLI todo app that helps me learn rust.
+A CLI todo app that helps me learn rust. You can read about it [here](https://brdv.mataroa.blog/)!
 
 ## What
 
@@ -14,10 +14,10 @@ It stores all todos in a file system structure. This means a directory is create
 
 The first version will contain:
 
-- [ ] base app structure
+- [x] base app structure
 - [x] rtodo initialization
-      This sets up the directory structure.
-- [ ] list todos
-      With arguments for `all` and `done` (default is undone todos)
-- [ ] add todo
+      this sets up the directory structure.
+- [x] list todos
+      with arguments for `all` and `done` (default is undone todos)
+- [x] add todo
 - [ ] mark todo as done

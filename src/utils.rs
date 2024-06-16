@@ -1,5 +1,5 @@
 use std::{
-    fs::{File, OpenOptions},
+    fs::{self, DirEntry, File, OpenOptions},
     io::{self, BufRead, BufReader, Read, Write},
 };
 
@@ -134,4 +134,18 @@ pub fn from_slug(slug: &str) -> String {
         .collect::<String>();
 
     original_string
+}
+
+pub fn get_files_from(location: &str) -> Vec<DirEntry> {
+    let paths = fs::read_dir(location)
+        .expect(format!("Given location doesnt exist on machine, {}", location).as_str());
+
+    paths
+        .filter_map(|entry| {
+            if let Ok(path) = entry {
+                return Some(path);
+            }
+            None
+        })
+        .collect()
 }
