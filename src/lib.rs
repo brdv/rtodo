@@ -1,10 +1,12 @@
 mod add;
+mod do_todo;
 mod init;
 mod list;
 mod todo;
 mod utils;
 
 pub use add::add;
+pub use do_todo::do_todo;
 pub use init::initialise_if_needed;
 pub use list::list;
 pub use utils::*;
@@ -26,7 +28,7 @@ pub enum Commands {
     /// Add a todo to the list
     Add { title: String },
     /// Complete a todo
-    Do { id: usize },
+    Do { id: u32 },
 }
 
 #[derive(Args, Debug)]

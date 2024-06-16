@@ -1,6 +1,12 @@
-use std::{fmt::Display, fs::DirEntry};
+use std::{
+    fmt::Display,
+    fs::{self, DirEntry},
+    io::Result,
+};
 
-use crate::{from_slug, get_files_from, get_rtodo_done_location, get_rtodo_todo_location};
+use crate::{
+    create_slug, from_slug, get_files_from, get_rtodo_done_location, get_rtodo_todo_location,
+};
 
 #[derive(Debug)]
 pub struct Todo {
@@ -8,6 +14,25 @@ pub struct Todo {
     pub task: String,
     pub status: TodoStatus,
     pub path: String,
+}
+
+// instance methods
+impl Todo {
+    pub fn mark_done(mut self) -> Result<Self> {
+        let new_path = format!(
+            "{}/{}.{}.rtodo.md",
+            get_rtodo_done_location(),
+            self.id,
+            create_slug(&self.task)
+        );
+
+        fs::rename(self.path, &new_path)?;
+
+        self.status = TodoStatus::Done;
+        self.path = new_path;
+
+        Ok(self)
+    }
 }
 
 // Static methods
