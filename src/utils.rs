@@ -3,15 +3,13 @@ use std::{
     io::{self, BufRead, BufReader, Read, Write},
 };
 
-use home;
-
 pub const RTODO_ROOT_DIR: &str = ".rtodo";
 pub const RTODO_TODO_DIR: &str = "todo";
 pub const RTODO_DONE_DIR: &str = "done";
 
 pub fn get_rtodo_todo_location() -> String {
     let mut path = get_rtodo_path();
-    path.push_str("/");
+    path.push('/');
     path.push_str(RTODO_TODO_DIR);
 
     path
@@ -19,7 +17,7 @@ pub fn get_rtodo_todo_location() -> String {
 
 pub fn get_rtodo_done_location() -> String {
     let mut path = get_rtodo_path();
-    path.push_str("/");
+    path.push('/');
     path.push_str(RTODO_DONE_DIR);
 
     path
@@ -120,14 +118,14 @@ pub fn create_slug(s: &str) -> String {
         .chars()
         .filter(|c| c.is_ascii_alphanumeric() || c.is_ascii_whitespace())
         .collect::<String>()
-        .replace(" ", "-")
+        .replace(' ', "-")
         .to_lowercase();
 
     slug
 }
 
 pub fn from_slug(slug: &str) -> String {
-    let replaced_spaces = slug.replace("-", " ");
+    let replaced_spaces = slug.replace('-', " ");
     let original_string = replaced_spaces
         .chars()
         .filter(|c| c.is_ascii_alphanumeric() || c.is_ascii_whitespace())
@@ -138,7 +136,7 @@ pub fn from_slug(slug: &str) -> String {
 
 pub fn get_files_from(location: &str) -> Vec<DirEntry> {
     let paths = fs::read_dir(location)
-        .expect(format!("Given location doesnt exist on machine, {}", location).as_str());
+        .unwrap_or_else(|_| panic!("Given location doesnt exist on machine, {}", location));
 
     paths
         .filter_map(|entry| {

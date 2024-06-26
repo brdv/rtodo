@@ -83,7 +83,7 @@ impl Todo {
     }
 
     pub fn is_valid_filename(string: &str) -> bool {
-        let split: Vec<&str> = string.split(".").collect();
+        let split: Vec<&str> = string.split('.').collect();
 
         split.len() == 4
             // id is valid u32
