@@ -20,4 +20,4 @@ The first version will contain:
 - [x] list todos
       with arguments for `all` and `done` (default is undone todos)
 - [x] add todo
-- [ ] mark todo as done
+- [x] mark todo as done

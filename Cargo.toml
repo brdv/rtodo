@@ -1,9 +1,15 @@
 [package]
-authors = ["brdv <brdv@pm.me>"]
 name = "rtodo"
-version = "0.0.1"
-edition = "2021"
 description = "A basic rust-based CLI todo app"
+version = "0.1.0"
+authors = ["brdv <brdv@pm.me>"]
+homepage = "https://github.com/brdv/rtodo"
+repository = "https://github.com/brdv/rtodo"
+keywords = ["cli","todo","rtodo"]
+categories = ["command-line-utilities"]
+edition = "2021"
+license = "MIT OR Apache-2.0"
+readme = "README.md"
 
 [dependencies]
 clap = { version = "4.5.4", features = ["derive"] }
