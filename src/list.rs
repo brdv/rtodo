@@ -1,11 +1,11 @@
 use crate::{todo::Todo, ListArgs};
 
 pub fn list(args: &ListArgs) -> Vec<Todo> {
-    let mut todos = Todo::get_todos(args.done);
-    if args.all {
-        let others = Todo::get_todos(!args.done);
-        todos.extend(others);
-    }
+    let mut todos = if args.all {
+        Todo::get_todos()
+    } else {
+        Todo::get_todos_with_filter(args.done)
+    };
 
     todos.sort_by_key(|todo| todo.id);
     todos

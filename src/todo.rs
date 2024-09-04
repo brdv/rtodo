@@ -56,7 +56,7 @@ impl Todo {
     }
 
     // Retrieves todos either from the done or todo directory as specified in the configs
-    pub fn get_todos(done: bool) -> Vec<Self> {
+    pub fn get_todos_with_filter(done: bool) -> Vec<Self> {
         let location = if done {
             get_rtodo_done_location()
         } else {
@@ -66,6 +66,16 @@ impl Todo {
         get_files_from(location.as_str())
             .into_iter()
             .filter_map(|file| Self::parse_entry(&file))
+            .collect()
+    }
+
+    pub fn get_todos() -> Vec<Self> {
+        let mut todos = get_files_from(get_rtodo_todo_location().as_str());
+        todos.append(&mut get_files_from(get_rtodo_done_location().as_str()));
+
+        todos
+            .into_iter()
+            .filter_map(|f| Self::parse_entry(&f))
             .collect()
     }
 
