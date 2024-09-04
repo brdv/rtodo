@@ -1,7 +1,8 @@
-use crate::{
+use std::{fs, io, path::Path};
+
+use crate::utils::{
     get_config_location, write_id_to_config, RTODO_DONE_DIR, RTODO_ROOT_DIR, RTODO_TODO_DIR,
 };
-use std::{fs, io, path::Path};
 
 pub fn initialise_if_needed() -> io::Result<()> {
     if !dirs_exist(get_dir_names()) || !config_exists() {

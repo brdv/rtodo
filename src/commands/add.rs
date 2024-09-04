@@ -1,11 +1,10 @@
 // add function
 // Take a title (single string now, maybe vectors later) as title and create and save a todo from it.
-
 use std::fs::{remove_file, File};
 use std::io::{self, Result};
 
-use crate::create_slug;
-use crate::{get_last_id, get_rtodo_todo_location, todo::Todo, up_id};
+use crate::todo::Todo;
+use crate::utils::{create_slug, get_last_id, get_rtodo_todo_location, up_id};
 
 pub fn add(title: &str) -> Result<Todo> {
     let path = create_new_todo_path(title);

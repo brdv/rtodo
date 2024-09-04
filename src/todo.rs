@@ -4,7 +4,7 @@ use std::{
     io::Result,
 };
 
-use crate::{
+use crate::utils::{
     create_slug, from_slug, get_files_from, get_rtodo_done_location, get_rtodo_todo_location,
 };
 

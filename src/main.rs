@@ -1,7 +1,9 @@
 use std::io;
 
 use clap::Parser;
-use rtodo::{add, do_todo, find_todo, initialise_if_needed, list, Cli, Commands};
+use rtodo::commands::{add, do_todo, list, Commands};
+use rtodo::utils::find_todo;
+use rtodo::{initialise_if_needed, Cli};
 
 fn main() -> io::Result<()> {
     initialise_if_needed()?;
