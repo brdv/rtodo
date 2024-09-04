@@ -29,6 +29,8 @@ pub enum Commands {
     Add { title: String },
     /// Complete a todo
     Do { id: u32 },
+    /// Get path for a todo file
+    Path { id: u32 },
 }
 
 #[derive(Args, Debug)]

@@ -3,6 +3,8 @@ use std::{
     io::{self, BufRead, BufReader, Read, Write},
 };
 
+use crate::todo::Todo;
+
 pub const RTODO_ROOT_DIR: &str = ".rtodo";
 pub const RTODO_TODO_DIR: &str = "todo";
 pub const RTODO_DONE_DIR: &str = "done";
@@ -146,4 +148,8 @@ pub fn get_files_from(location: &str) -> Vec<DirEntry> {
             None
         })
         .collect()
+}
+
+pub fn find_todo(id: u32) -> Option<Todo> {
+    Todo::get_todos().into_iter().find(|todo| todo.id == id)
 }

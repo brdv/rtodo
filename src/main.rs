@@ -1,7 +1,7 @@
 use std::io;
 
 use clap::Parser;
-use rtodo::{add, do_todo, initialise_if_needed, list, Cli, Commands};
+use rtodo::{add, do_todo, find_todo, initialise_if_needed, list, Cli, Commands};
 
 fn main() -> io::Result<()> {
     initialise_if_needed()?;
@@ -29,6 +29,10 @@ fn main() -> io::Result<()> {
         },
         Commands::Do { id } => match do_todo(id) {
             Some(todo) => println!("Moved todo with id {} to {}", id, todo.path),
+            None => eprintln!("Todo with id {} could not be found", id),
+        },
+        Commands::Path { id } => match find_todo(id) {
+            Some(todo) => println!("{}", todo.path),
             None => eprintln!("Todo with id {} could not be found", id),
         },
     };
